@@ -1,15 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Login = () => {
+const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = async (event) => {
+  const register = async (event) => {
     event.preventDefault();
 
+    if (!name || !email || !password) return;
+
     try {
-      const response = await axios.post(`https://shy-cloud-3319.fly.dev/api/v1/auth/login`, {
+      const response = await axios.post(`https://shy-cloud-3319.fly.dev/api/v1/auth/register`, {
+        name,
         email,
         password,
       });
@@ -29,14 +33,20 @@ const Login = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-gradient-to-tr ">
+    <div className="hero min-h-screen ">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login</h1>
-          <p className="py-6">Login for more further access! </p>
+          <h1 className="text-5xl font-bold">Register</h1>
+          <p className="py-6">Create your new account!</p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={login} className="card-body">
+          <form onSubmit={register} className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input type="text" placeholder="name" className="input input-bordered" required value={name} onChange={(event) => setName(event.target.value)} />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -48,14 +58,9 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input type="password" placeholder="password" className="input input-bordered" required value={password} onChange={(event) => setPassword(event.target.value)} />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary">Register</button>
             </div>
             <div className="form-control mt-6">
               <button className="btn bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200">
@@ -72,4 +77,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
