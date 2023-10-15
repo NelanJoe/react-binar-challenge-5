@@ -1,3 +1,21 @@
+import PropTypes from "prop-types";
+
+const MovieItem = ({ movie }) => {
+  let imgSrc;
+  if (!movie.poster_path || !movie.backdrop_path) {
+    imgSrc = `https://fakeimg.pl/350x200/?text=Not+Available+Image`;
+  } else {
+    imgSrc = `https://image.tmdb.org/t/p/w300/${
+      movie.poster_path || movie.backdrop_path
+    }`;
+  }
+
+  return (
+    <div className="card card-compact md:w-96 w-full bg-base-100 shadow-xl">
+      <figure>
+        <img
+          src={imgSrc}
+          alt={movie?.title}
 const MovieItem = () => {
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl">
@@ -9,6 +27,22 @@ const MovieItem = () => {
         />
       </figure>
       <div className="card-body">
+        <h2 className="card-title">{movie?.title}</h2>
+        <p className="italic text-gray-300">{movie?.release_date}</p>
+        <p className="">
+          <span>⭐</span>
+          {movie?.vote_average}
+        </p>
+        <div
+          className="tooltip tooltip-primary tooltip-right"
+          data-tip={movie?.overview}
+        >
+          <p className="truncate cursor-pointer">{movie?.overview}</p>
+        </div>
+        <div className="card-actions justify-end">
+          <a
+            className="btn btn-primary inline-flex w-full"
+            href={`/movie/${movie?.id}`}
         <h2 className="card-title">Avengers: Endgame</h2>
         <p className="">
           <span>⭐</span>
@@ -48,5 +82,10 @@ const MovieItem = () => {
     </div>
   );
 };
+
+MovieItem.propTypes = {
+  movie: PropTypes.object,
+};
+
 
 export default MovieItem;

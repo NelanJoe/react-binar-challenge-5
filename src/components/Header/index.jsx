@@ -47,6 +47,8 @@ const Header = () => {
                 />
               </svg>
             </button>
+          </div>
+          <div className="hidden md:block md:space-x-4">
             <NavbarModal isOpen={isOpen} closeModal={handleToggleModal} />
           </div>
           <div className="hidden md:space-x-4 sm:hidden lg:block">
