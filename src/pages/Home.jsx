@@ -47,7 +47,6 @@ const Home = () => {
         <div className="flex md:flex-row flex-wrap justify-center gap-6 text-white">
           <MovieList movies={slicePopularMovies} />
         </div>
-      </section>
     </>
   );
 };

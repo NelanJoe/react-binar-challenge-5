@@ -16,6 +16,13 @@ const MovieItem = ({ movie }) => {
         <img
           src={imgSrc}
           alt={movie?.title}
+const MovieItem = () => {
+  return (
+    <div className="card card-compact w-96 bg-base-100 shadow-xl">
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1936&q=80"
+          alt="Shoes"
           className="w-full h-[200px] object-top object-cover"
         />
       </figure>
@@ -36,6 +43,21 @@ const MovieItem = ({ movie }) => {
           <a
             className="btn btn-primary inline-flex w-full"
             href={`/movie/${movie?.id}`}
+        <h2 className="card-title">Avengers: Endgame</h2>
+        <p className="">
+          <span>⭐</span>
+          7.2
+        </p>
+        <p>
+          After the devastating events of Avengers: Infinity War (2018), the
+          universe is in ruins. With the help of remaining allies, the Avengers
+          assemble once more in order to reverse Thanos actions and restore
+          balance to the universe.
+        </p>
+        <div className="card-actions justify-end">
+          <a
+            className="btn btn-primary inline-flex w-full"
+            href="/movie/029103190"
           >
             <span>
               <svg
@@ -64,5 +86,6 @@ const MovieItem = ({ movie }) => {
 MovieItem.propTypes = {
   movie: PropTypes.object,
 };
+
 
 export default MovieItem;
