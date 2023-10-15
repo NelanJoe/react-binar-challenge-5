@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavbarModal from "../NavbarModal";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleModal = () => {
     setIsOpen(!isOpen);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/search?query=${query}&page=1`);
   };
 
   return (
@@ -21,11 +27,12 @@ const Header = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:block w-full max-w-xl">
-          <form action="" className="w-full">
+          <form action="" className="w-full" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Type here"
               className="input input-bordered input-md w-full rounded-full"
+              onChange={(e) => setQuery(e.target.value)}
             />
           </form>
         </div>
