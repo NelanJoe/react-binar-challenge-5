@@ -1,19 +1,18 @@
+import PropTypes from "prop-types";
 import MovieItem from "../MovieItem";
 
-const MovieList = () => {
+const MovieList = ({ movies }) => {
   return (
-    <div className="flex md:flex-row flex-wrap justify-center gap-6">
-      <MovieItem />
-      <MovieItem />
-      <MovieItem />
-      <MovieItem />
-      <MovieItem />
-      <MovieItem />
-      <MovieItem />
-      <MovieItem />
-      <MovieItem />
-    </div>
+    <>
+      {movies?.map((movie) => (
+        <MovieItem key={movie?.id} movie={movie} />
+      ))}
+    </>
   );
+};
+
+MovieList.propTypes = {
+  movies: PropTypes.array,
 };
 
 export default MovieList;
