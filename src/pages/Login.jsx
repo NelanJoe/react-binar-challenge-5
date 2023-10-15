@@ -40,9 +40,9 @@ const Login = () => {
           />
 
           <div className="hidden lg:relative lg:block lg:p-12">
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Login to your account</h2>
+            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-6xl">Login to your account</h2>
 
-            <p className="mt-4 leading-relaxed text-white/90">
+            <p className="mt-4 leading-relaxed text-white/90 text-2xl">
               You need to login for more further information, such as <Typed strings={["Upcoming Movies.", "Popular Movies.", "Detail Movies."]} typeSpeed={120} backSpeed={30} loop />
             </p>
           </div>

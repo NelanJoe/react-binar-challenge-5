@@ -3,9 +3,43 @@ import { useState } from "react";
 import Typed from "react-typed";
 
 const Register = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  //Fungsi-fungsi untuk gabungin nama depan dan nama belakang
+  const combineNames = (first, last) => {
+    setName(`${first} ${last}`);
+  };
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+    combineNames(event.target.value, lastName);
+  };
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+    combineNames(firstName, event.target.value);
+  };
+
+  //Fungsi-fungsi untuk validasi password
+  const validatePassword = (password, confirmation) => {
+    if (password !== confirmation) {
+      setPasswordError("Password do not match!");
+    } else {
+      setPasswordError("");
+    }
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    validatePassword(event.target.value, passwordConfirmation);
+  };
+  const handlePasswordConfirmationChange = (event) => {
+    setPasswordConfirmation(event.target.value);
+    validatePassword(password, event.target.value);
+  };
 
   const register = async (event) => {
     event.preventDefault();
@@ -54,9 +88,11 @@ const Register = () => {
               </svg>
             </a>
 
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Welcome to Moviereview! </h2>
+            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-6xl">Welcome to Moviereview! </h2>
 
-            <p className="mt-4 leading-relaxed text-white/90">Create your new account if you dont have one and start EXPLORING</p>
+            <p className="mt-4 leading-relaxed text-white/90 text-2xl">
+              Create your new account if you dont have one and start <Typed strings={["EXPLORING."]} typeSpeed={120} />
+            </p>
           </div>
         </section>
 
@@ -73,38 +109,66 @@ const Register = () => {
                 </svg>
               </a>
 
-              <h1 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl">Welcome to Squid 🦑</h1>
+              <h1 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl">Welcome to Moviereview! </h1>
 
-              <p className="mt-4 leading-relaxed text-gray-500 dark:text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.</p>
+              <p className="mt-4 leading-relaxed text-gray-500 dark:text-gray-400">Create your new account if you dont have one and start EXPLORING.</p>
             </div>
 
-            <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+            <form onSubmit={register} className="mt-8 grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="FirstName" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                   First Name
                 </label>
-                <input type="text" id="FirstName" name="first_name" className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2" />
+                <input
+                  type="text"
+                  id="FirstName"
+                  name="first_name"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+                  value={firstName}
+                  onChange={handleFirstNameChange}
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="LastName" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Last Name
                 </label>
-                <input type="text" id="LastName" name="last_name" className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2" />
+                <input
+                  type="text"
+                  id="LastName"
+                  name="last_name"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+                  value={lastName}
+                  onChange={handleLastNameChange}
+                />
               </div>
 
               <div className="col-span-6">
                 <label htmlFor="Email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Email
                 </label>
-                <input type="email" id="Email" name="email" className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2" />
+                <input
+                  type="email"
+                  id="Email"
+                  name="email"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="Password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Password
                 </label>
-                <input type="password" id="Password" name="password" className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2" />
+                <input
+                  type="password"
+                  id="Password"
+                  name="password"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -115,9 +179,13 @@ const Register = () => {
                   type="password"
                   id="PasswordConfirmation"
                   name="password_confirmation"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2 "
+                  value={passwordConfirmation}
+                  onChange={handlePasswordConfirmationChange}
                 />
               </div>
+
+              {passwordError && <div className="col-span-6 text-red-600">{passwordError}</div>}
 
               <div className="col-span-6">
                 <label htmlFor="MarketingAccept" className="flex gap-4">
