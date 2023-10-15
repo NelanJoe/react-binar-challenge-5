@@ -10,8 +10,8 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-30 ">
-      <nav className="navbar px-4 md:px-4 items-center border-b border-b-gray-200 bg-white dark:bg-slate-900 dark:border-b-slate-700 bg-opacity-30 backdrop-filter backdrop-blur-lg firefox:bg-opacity-80">
+    <header className="sticky top-0 z-10">
+      <nav className="navbar px-4 md:px-4 items-center border-b border-b-gray-200 bg-white dark:bg-slate-900 dark:border-b-slate-700 bg-opacity-30 backdrop-filter backdrop-blur-lg">
         <div className="navbar-start h-16">
           <Link
             to="/"
@@ -30,7 +30,7 @@ const Header = () => {
           </form>
         </div>
         <div className="navbar-end">
-          <div className="flex-none items-center block lg:hidden">
+          <div className="flex-none items-center block md:hidden">
             <button type="button" onClick={handleToggleModal}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,6 @@ const Header = () => {
                 />
               </svg>
             </button>
-            <NavbarModal isOpen={isOpen} closeModal={handleToggleModal} />
           </div>
           <div className="hidden md:block md:space-x-4">
             <Link
@@ -65,6 +64,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
+      <NavbarModal isOpen={isOpen} closeModal={handleToggleModal} />
     </header>
   );
 };

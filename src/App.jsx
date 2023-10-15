@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PopularMovies from "./pages/PopularMovies";
 
 const App = () => {
   return (
@@ -12,6 +13,9 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/popular-movies" element={<PopularMovies />} />
+
+        {/* Authorization */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
