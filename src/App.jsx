@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PopularMovies from "./pages/PopularMovies";
+import DetailMovie from "./pages/DetailMovie";
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -12,8 +14,13 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/popular-movies" element={<PopularMovies />} />
+
+        {/* Authorization */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<DetailMovie />} />
+        <Route path="/details/:movieId" element={<DetailMovie />} />
       </Routes>
 
       <Footer />

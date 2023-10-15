@@ -47,9 +47,11 @@ const Header = () => {
                 />
               </svg>
             </button>
-            <NavbarModal isOpen={isOpen} closeModal={handleToggleModal} />
           </div>
           <div className="hidden md:block md:space-x-4">
+            <NavbarModal isOpen={isOpen} closeModal={handleToggleModal} />
+          </div>
+          <div className="hidden md:space-x-4 sm:hidden lg:block">
             <Link
               to="/login"
               className="px-6 py-3 rounded-full font-semibold text-white bg-red-500 hover:bg-red-600"
