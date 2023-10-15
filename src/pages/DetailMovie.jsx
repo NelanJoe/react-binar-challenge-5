@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Modal from "../Modal/Index";
+import Modal from "../components/Modal/Index";
 
-const Index = () => {
+const DetailMovie = () => {
   const [key, setKey] = useState("");
   const [dataFilm, setDataFilm] = useState([]);
   const [videos, setVideos] = useState([]);
@@ -101,4 +101,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default DetailMovie;
