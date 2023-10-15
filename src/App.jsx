@@ -1,13 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PopularMovies from "./pages/PopularMovies";
-import Footer from "./components/Footer";
 import DetailMovie from "./pages/DetailMovie";
-
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
