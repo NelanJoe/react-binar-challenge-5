@@ -5,6 +5,7 @@ import Modal from "../components/Modal/Index";
 
 const DetailMovie = () => {
   const [key, setKey] = useState("");
+  const [genres, setgenres] = useState([]);
   const [dataFilm, setDataFilm] = useState([]);
   const [videos, setVideos] = useState([]);
   const { movieId } = useParams();
@@ -30,6 +31,7 @@ const DetailMovie = () => {
         const data = response?.data;
         setDataFilm(data?.data);
         setVideos(data?.data?.videos);
+        setgenres(data?.data?.genres);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           setErrors({
@@ -47,7 +49,7 @@ const DetailMovie = () => {
         });
       }
     };
-    getData(569094);
+    getData(movieId);
   }, [errors]);
   useEffect(() => {
     const getKey = () => {
@@ -60,35 +62,42 @@ const DetailMovie = () => {
         console.log(key);
       }
     };
+
     if (videos) {
       getKey();
     }
+    console.log(dataFilm);
   }, [dataFilm, key, videos]);
   return (
     <>
-      <div className="hero min-h-screen bg-base-200 bg-[url('https://image.tmdb.org/t/p/original/dqK9Hag1054tghRQSqLSfrkvQnA.jpg')]">
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage: `${
+            import.meta.env.VITE_API_IMAGE_URL + dataFilm.backdrop_path
+          }`,
+        }}
+      >
         <div className="hero-content flex-col justify-start md:flex-row xl:flex-row w-full space-x-9">
           <img
-            src="https://image.tmdb.org/t/p/original/1E5baAaEse26fej7uHcjOgEE2t2.jpg"
+            src={import.meta.env.VITE_API_IMAGE_URL + dataFilm.poster_path}
             className=" rounded-lg shadow-2xl w-8/12 md:w-3/12 xl:3/12"
           />
           <div className="space-y-3 justify-start md:w-7/12">
-            <h1 className="text-5xl font-bold ">
-              The Fast and the Furious 2001
-            </h1>
+            <h1 className="text-5xl font-bold ">{dataFilm.title}</h1>
             <p className="">
-              Genre :{" "}
-              <i>
-                <strong>Crime/Adventure 1h 46m !</strong>
+              <i className="block">
+                {genres.map((item) => (
+                  <strong key={item.id} className=" text-md md:text-lg">
+                    {item.name},{" "}
+                  </strong>
+                ))}
               </i>
             </p>
-            <p className="">⭐ 7.5/10</p>
+            <p className="">⭐ {dataFilm.vote_average}</p>
             <p className="">
-              <strong className="text-2xl">overview : </strong> Provident
-              cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-              exercitationem quasi. In deleniti eaque aut repudiandae et a id
-              nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Nesciunt dolore quo labore repudiandae!
+              <strong className="text-2xl">overview : </strong>
+              {dataFilm.overview}
             </p>
             <button className="btn btn-primary" onClick={() => show()}>
               View Trailer
