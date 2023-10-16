@@ -50,8 +50,8 @@ const DetailMovie = () => {
       }
     };
     getData(movieId);
-  }, [errors]);
-  
+  }, [errors, movieId]);
+
   useEffect(() => {
     const getKey = () => {
       if (videos && videos.length > 0) {

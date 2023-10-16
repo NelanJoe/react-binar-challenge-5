@@ -76,7 +76,10 @@ const CarouselBody = ({ movie }) => {
           </a>
         </div>
         <div>
-          <NavLink className="btn btn-sm btn-primary">
+          <NavLink
+            className="btn btn-sm btn-primary"
+            to={`/movie/${movie?.id}`}
+          >
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
