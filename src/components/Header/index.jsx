@@ -12,7 +12,7 @@ const Header = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate(`/search?query=${query}&page=1`);
+    navigate(`/search?page=1&query=${query}`);
   };
 
   return (
