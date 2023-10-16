@@ -12,7 +12,7 @@ const MovieItem = ({ movie }) => {
   }
 
   return (
-    <div className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className="card card-compact bg-base-100 shadow-xl w-full md:w-96">
       <figure>
         <img
           src={imgSrc}
@@ -28,7 +28,7 @@ const MovieItem = ({ movie }) => {
           {movie?.vote_average}
         </p>
         <div
-          className="tooltip tooltip-primary tooltip-top"
+          className="tooltip tooltip-primary xl:tooltip-right md:tooltip-top"
           data-tip={movie?.overview}
         >
           <p className="truncate cursor-pointer">{movie?.overview}</p>
