@@ -37,6 +37,7 @@ const DetailMovie = () => {
     getData(movieId);
   }, []);
 
+
   useEffect(() => {
     const getKey = () => {
       if (videos && videos.length > 0) {
