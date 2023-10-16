@@ -17,15 +17,15 @@ const Search = () => {
         const response = await axios.get(
           `${
             import.meta.env.VITE_API_URL
-          }/api/v1/search/movie?query=${query}&page=${page}`,
+          }/api/v1/search/movie?page=${page}&query=${query}`,
           {
             headers: {
               Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IkZhaG1pIEFsZmFyZXphIiwiZW1haWwiOiJmYWxmYXJlemExQGJpbmFyYWNhZGVteS5vcmciLCJpYXQiOjE2OTMxODEzMTV9.ki5wCImtVV7qOhzZHf5A4RuxcU7XcAdMQ5QLVTe_6zY`,
             },
           }
         );
-        const data = response?.data;
-        setDataResult([data?.data]);
+        const { data } = response.data;
+        setDataResult(data);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           setErrors({
@@ -45,14 +45,16 @@ const Search = () => {
     };
     getMovie();
     console.log(dataResult);
-  }, [query]);
+  }, [page, query]);
+  console.log(query);
+  console.log(dataResult);
 
   return (
     <>
       <h3>Result from {'"' + query + '"'}</h3>
       <div className="flex md:flex-row flex-wrap justify-center gap-6">
-        {dataResult.map((item) => (
-          <MovieItem key={item.id} />
+        {dataResult?.map((item) => (
+          <MovieItem key={item.id} movie={item} />
         ))}
       </div>
     </>
