@@ -19,8 +19,8 @@ const App = () => {
         {/* Authorization */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/movie/:movieId" element={<DetailMovie />} />
         <Route path="*" element={<DetailMovie />} />
-        <Route path="/details/:movieId" element={<DetailMovie />} />
       </Routes>
 
       <Footer />

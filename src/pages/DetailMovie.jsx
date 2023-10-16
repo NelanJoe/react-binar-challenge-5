@@ -47,8 +47,8 @@ const DetailMovie = () => {
         });
       }
     };
-    getData(569094);
-  }, [errors]);
+    getData(movieId);
+  }, [errors, movieId]);
   useEffect(() => {
     const getKey = () => {
       if (videos && videos.length > 0) {
