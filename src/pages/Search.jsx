@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import MovieItem from "../components/MovieItem";
-import { data } from "autoprefixer";
-
 const Search = () => {
   const [dataResult, setDataResult] = useState([]);
   const [searchParam] = useSearchParams();
