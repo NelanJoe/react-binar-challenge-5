@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import NavbarModal from "../NavbarModal";
-import axios from "axios";
 import { ENDPOINTS } from "../../utils/endpoints";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import NavbarModal from "../NavbarModal";
+import SearchForm from "../SearchForm";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
 
   const handleToggleModal = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    navigate(`/search?query=${query}&page=1`);
   };
 
   const handleLogout = async () => {
@@ -57,14 +51,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:block w-full max-w-xl">
-          <form action="" className="w-full" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered input-md w-full rounded-full"
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </form>
+          <SearchForm />
         </div>
         <div className="navbar-end">
           <div className="flex-none items-center block lg:hidden">

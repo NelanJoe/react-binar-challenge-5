@@ -2,55 +2,39 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "../components/Modal/Index";
+import { ENDPOINTS } from "../utils/endpoints";
 
 const DetailMovie = () => {
   const [key, setKey] = useState("");
   const [genres, setgenres] = useState([]);
   const [dataFilm, setDataFilm] = useState([]);
   const [videos, setVideos] = useState([]);
+  
   const { movieId } = useParams();
-  const [errors, setErrors] = useState({
-    isError: false,
-    message: null,
-  });
+  
   const show = () => {
     document.getElementById("my_modal_4").showModal();
-    console.log("show");
   };
+
   useEffect(() => {
     const getData = async (id) => {
+      const DETAIL_URL = ENDPOINTS.detailMovie(id);
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/v1/movie/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IkZhaG1pIEFsZmFyZXphIiwiZW1haWwiOiJmYWxmYXJlemExQGJpbmFyYWNhZGVteS5vcmciLCJpYXQiOjE2OTMxODEzMTV9.ki5wCImtVV7qOhzZHf5A4RuxcU7XcAdMQ5QLVTe_6zY`,
-            },
-          }
-        );
+        const response = await axios.get(DETAIL_URL, {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IkZhaG1pIEFsZmFyZXphIiwiZW1haWwiOiJmYWxmYXJlemExQGJpbmFyYWNhZGVteS5vcmciLCJpYXQiOjE2OTMxODEzMTV9.ki5wCImtVV7qOhzZHf5A4RuxcU7XcAdMQ5QLVTe_6zY`,
+          },
+        });
         const data = response?.data;
         setDataFilm(data?.data);
         setVideos(data?.data?.videos);
         setgenres(data?.data?.genres);
       } catch (error) {
-        if (axios.isAxiosError(error)) {
-          setErrors({
-            ...errors,
-            isError: true,
-            message: error?.response?.data?.message,
-          });
-          return;
-        }
-        alert(errors.message);
-        setErrors({
-          ...error,
-          isError: true,
-          message: error?.message,
-        });
+        console.log(error);
       }
     };
     getData(movieId);
-  }, [errors, movieId]);
+  }, [movieId]);
 
   useEffect(() => {
     const getKey = () => {
@@ -60,15 +44,14 @@ const DetailMovie = () => {
           .slice(0, 1);
         const getKey = getTrailer[0].key;
         setKey(getKey);
-        console.log(key);
       }
     };
 
     if (videos) {
       getKey();
     }
-    console.log(dataFilm);
   }, [dataFilm, key, videos]);
+
   return (
     <>
       <div
@@ -90,7 +73,7 @@ const DetailMovie = () => {
               <i className="block">
                 {genres.map((item) => (
                   <strong key={item.id} className=" text-md md:text-lg">
-                    {item.name},{" "}
+                    {item.name}
                   </strong>
                 ))}
               </i>

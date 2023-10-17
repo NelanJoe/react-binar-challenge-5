@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import SearchForm from "../SearchForm";
 
 const NavbarModal = ({ onClose, user, onLogout }) => {
   return (
@@ -41,13 +42,7 @@ const NavbarModal = ({ onClose, user, onLogout }) => {
             </NavLink>
           </div>
           <div>
-            <form action="" className="w-full">
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-md w-full rounded-full"
-              />
-            </form>
+            <SearchForm />
           </div>
           <hr className="outline-none border-none bg-white w-full py-[2px] rounded-full" />
           <div className="mt-8 space-y-4">
