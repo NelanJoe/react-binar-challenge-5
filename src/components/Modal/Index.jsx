@@ -7,7 +7,7 @@ const Index = ({ keytube }) => {
     event.target.playVideo();
   };
   const opts = {
-    height: "500",
+    height: "470",
     width: "975",
     playerVars: {
       autoplay: 1,
