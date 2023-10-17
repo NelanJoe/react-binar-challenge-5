@@ -2,15 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import MovieItem from "../components/MovieItem";
+
 const Search = () => {
   const [dataResult, setDataResult] = useState([]);
-  const [searchParam] = useSearchParams();
-  const query = searchParam.get("query");
-  const page = searchParam.get("page");
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
+
+  const [searchParam] = useSearchParams();
+
+  const query = searchParam.get("query");
+  const page = searchParam.get("page");
+
   useEffect(() => {
     const getMovie = async () => {
       try {
@@ -44,10 +48,7 @@ const Search = () => {
       }
     };
     getMovie();
-    console.log(dataResult);
-  }, [page, query]);
-  console.log(query);
-  console.log(dataResult);
+  }, [page, query, errors]);
 
   return (
     <>

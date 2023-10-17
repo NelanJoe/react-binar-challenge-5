@@ -1,24 +1,24 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./wrapper/ProtectedRoute";
+import GuestRoute from "./wrapper/GuestRoute";
 import Home from "./pages/Home";
-import Header from "./components/Header";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 import PopularMovies from "./pages/PopularMovies";
 import DetailMovie from "./pages/DetailMovie";
 import Search from "./pages/Search";
-
+import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Profile from "./pages/Profile";
-import ProtectedRoute from "./wrapper/ProtectedRoute";
-import GuestRoute from "./wrapper/GuestRoute";
+
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ENDPOINTS } from "./utils/endpoints";
+
 const App = () => {
   return (
     <GoogleOAuthProvider clientId={ENDPOINTS.googleOauthClientId}>
       <BrowserRouter>
         <Header />
-
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
@@ -34,7 +34,6 @@ const App = () => {
             <Route path="/register" element={<Register />} />
           </Route>
         </Routes>
-
         <Footer />
       </BrowserRouter>
     </GoogleOAuthProvider>

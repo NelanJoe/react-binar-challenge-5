@@ -4,28 +4,27 @@ import { useParams } from "react-router-dom";
 import Modal from "../components/Modal/Index";
 import { ENDPOINTS } from "../utils/endpoints";
 
-
 const DetailMovie = () => {
   const [key, setKey] = useState("");
   const [genres, setgenres] = useState([]);
   const [dataFilm, setDataFilm] = useState([]);
   const [videos, setVideos] = useState([]);
+  
   const { movieId } = useParams();
+  
   const show = () => {
     document.getElementById("my_modal_4").showModal();
-    console.log("show");
   };
+
   useEffect(() => {
     const getData = async (id) => {
-      const DETAIL_URL = ENDPOINTS.detailMovie(id)
+      const DETAIL_URL = ENDPOINTS.detailMovie(id);
       try {
-        const response = await axios.get(DETAIL_URL,
-          {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IkZhaG1pIEFsZmFyZXphIiwiZW1haWwiOiJmYWxmYXJlemExQGJpbmFyYWNhZGVteS5vcmciLCJpYXQiOjE2OTMxODEzMTV9.ki5wCImtVV7qOhzZHf5A4RuxcU7XcAdMQ5QLVTe_6zY`,
-            },
-          }
-        );
+        const response = await axios.get(DETAIL_URL, {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IkZhaG1pIEFsZmFyZXphIiwiZW1haWwiOiJmYWxmYXJlemExQGJpbmFyYWNhZGVteS5vcmciLCJpYXQiOjE2OTMxODEzMTV9.ki5wCImtVV7qOhzZHf5A4RuxcU7XcAdMQ5QLVTe_6zY`,
+          },
+        });
         const data = response?.data;
         setDataFilm(data?.data);
         setVideos(data?.data?.videos);
@@ -35,8 +34,7 @@ const DetailMovie = () => {
       }
     };
     getData(movieId);
-  }, []);
-
+  }, [movieId]);
 
   useEffect(() => {
     const getKey = () => {
