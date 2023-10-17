@@ -7,4 +7,5 @@ export const ENDPOINTS = {
   detailMovie: (id) => {
     return `${API_URL}/api/v1/movie/${id}`;
   },
+  detailUser: `${API_URL}/api/v1/auth/me`,
 };
