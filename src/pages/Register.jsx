@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Typed from "react-typed";
+import GoogleLogin from "../components/GoogleLogin/Index";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -202,13 +204,14 @@ const Register = () => {
 
                 <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
                   Already have an account?
-                  <a href="#" className="text-gray-700 underline dark:text-gray-200">
-                    Log in
-                  </a>
+                  <Link to={"/login"} className="text-gray-700 underline dark:text-gray-200">
+                    Login
+                  </Link>
                   .
                 </p>
               </div>
             </form>
+            <GoogleLogin buttonText={"CONTINUE WITH GOOGLE"} />
           </div>
         </main>
       </div>

@@ -11,29 +11,33 @@ import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./wrapper/ProtectedRoute";
 import GuestRoute from "./wrapper/GuestRoute";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ENDPOINTS } from "./utils/endpoints";
 const App = () => {
   return (
-    <BrowserRouter>
-      <Header />
+    <GoogleOAuthProvider clientId={ENDPOINTS.googleOauthClientId}>
+      <BrowserRouter>
+        <Header />
 
-      <Routes>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/popular-movies" element={<PopularMovies />} />
-          <Route path="/movie/:movieId" element={<DetailMovie />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
+        <Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/popular-movies" element={<PopularMovies />} />
+            <Route path="/movie/:movieId" element={<DetailMovie />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
 
-        {/* Authorization */}
-        <Route element={<GuestRoute />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
-      </Routes>
+          {/* Authorization */}
+          <Route element={<GuestRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+        </Routes>
 
-      <Footer />
-    </BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 };
 
