@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID;
 
 export const ENDPOINTS = {
   login: `${API_URL}/api/v1/auth/login`,
@@ -8,5 +9,5 @@ export const ENDPOINTS = {
     return `${API_URL}/api/v1/movie/${id}`;
   },
   detailUser: `${API_URL}/api/v1/auth/me`,
-  googleOauthClientId: `274018120870-2lcndj6ng05p6afvif576ljv9qgl1h4a.apps.googleusercontent.com`,
+  googleOauthClientId: GOOGLE_CLIENT_ID,
 };
