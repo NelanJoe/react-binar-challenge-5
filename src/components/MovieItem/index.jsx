@@ -34,9 +34,9 @@ const MovieItem = ({ movie }) => {
           <p className="truncate cursor-pointer">{movie?.overview}</p>
         </div>
         <div className="card-actions justify-end">
-          <Link to={`movie/${movie?.id}`}
+          <Link
+            to={`/movie/${movie?.id}`}
             className="btn btn-primary inline-flex w-full"
-            
           >
             <span>
               <svg
