@@ -8,4 +8,5 @@ export const ENDPOINTS = {
     return `${API_URL}/api/v1/movie/${id}`;
   },
   detailUser: `${API_URL}/api/v1/auth/me`,
+  googleOauthClientId: `274018120870-2lcndj6ng05p6afvif576ljv9qgl1h4a.apps.googleusercontent.com`,
 };
