@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ENDPOINTS } from "../utils/endpoints";
-import MovieList from "../components/MovieList";
+import MovieItem from "../components/MovieList";
 
 const Search = () => {
   const [dataResult, setDataResult] = useState([]);
