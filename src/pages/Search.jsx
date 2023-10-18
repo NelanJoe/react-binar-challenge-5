@@ -10,12 +10,14 @@ const Search = () => {
     isError: false,
     message: null,
   });
-  const token = localStorage.getItem("token");
+
   const [searchParam] = useSearchParams();
   const query = searchParam.get("query");
   const page = searchParam.get("page");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
     const getMovie = async (page, query) => {
       try {
         const SEARCH_URL = ENDPOINTS.searchMovies(page, query);
@@ -24,6 +26,7 @@ const Search = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+
         const { data } = response.data;
         setDataResult(data);
       } catch (error) {
@@ -51,7 +54,7 @@ const Search = () => {
       <div className="mt-14 mb-8 mx-32 text-2xl font-bold">
         Result from {'"' + query + '"'}
       </div>
-      <div className="flex md:flex-row flex-wrap justify-center gap-6">
+      <div className="flex md:flex-row flex-wrap justify-center gap-6 mb-12">
         {dataResult?.map((item) => (
           <MovieItem key={item.id} movie={item} />
         ))}
