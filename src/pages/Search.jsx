@@ -48,8 +48,8 @@ const Search = () => {
 
   return (
     <>
-      <div className="flex md:flex-row flex-wrap justify-center gap-6">
       <h3>Result from {'"' + query + '"'}</h3>
+      <div className="flex md:flex-row flex-wrap justify-center gap-6">
         {dataResult?.map((item) => (
           <MovieItem key={item.id} movie={item} />
         ))}
