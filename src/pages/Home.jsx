@@ -44,7 +44,7 @@ const Home = () => {
             More Popular Movies
           </Link>
         </div>
-        <div className="flex md:flex-row flex-wrap justify-center gap-6 text-white">
+        <div className="flex md:flex-row flex-wrap justify-center gap-6 text-white mb-12">
           <MovieList movies={slicePopularMovies} />
         </div>
       </section>

@@ -27,7 +27,7 @@ const MovieItem = ({ movie }) => {
           {movie?.vote_average}
         </p>
         <div
-          className="tooltip tooltip-primary xl:tooltip-right md:tooltip-top"
+          className="tooltip tooltip-primary xl:tooltip-top md:tooltip-top"
           data-tip={movie?.overview}
         >
           <p className="truncate cursor-pointer">{movie?.overview}</p>

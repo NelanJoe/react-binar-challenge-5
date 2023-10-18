@@ -1,19 +1,43 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { ENDPOINTS } from "../../utils/endpoints";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import NavbarModal from "../NavbarModal";
+import SearchForm from "../SearchForm";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   const handleToggleModal = () => {
     setIsOpen(!isOpen);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    navigate({ pathname: "/search", search: `?page=1&query=${query}` });
+
+  const handleLogout = async () => {
+    localStorage.removeItem("token");
+    window.location.replace("/login");
   };
+
+  useEffect(() => {
+    const getDetailUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        const { data } = await axios.get(ENDPOINTS.detailUser, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(data?.data);
+      } catch (err) {
+        console.error(err);
+        throw new Error(err);
+      }
+    };
+    getDetailUser();
+  }, []);
 
   return (
     <header className="sticky top-0 z-30 ">
@@ -27,14 +51,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:block w-full max-w-xl">
-          <form action="" className="w-full" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered input-md w-full rounded-full"
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </form>
+          <SearchForm />
         </div>
         <div className="navbar-end">
           <div className="flex-none items-center block lg:hidden">
@@ -56,23 +73,43 @@ const Header = () => {
             </button>
           </div>
           <div className="hidden md:space-x-4 sm:hidden lg:block">
-            <Link
-              to="/login"
-              className="px-6 py-3 rounded-full font-semibold text-white bg-red-500 hover:bg-red-600"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="px-6 py-3 rounded-full font-semibold outline outline-1 hover:text-white bg-transparent hover:bg-red-600 hover:border-none "
-            >
-              Register
-            </Link>
+            {user !== null ? (
+              <>
+                <Link to="/profile">{user?.name}</Link>
+                <button
+                  className="btn btn-sm btn-primary rounded-full"
+                  onClick={handleLogout}
+                >
+                  Logout →
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="px-6 py-3 rounded-full font-semibold text-white bg-red-500 hover:bg-red-600"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-6 py-3 rounded-full font-semibold outline outline-1 hover:text-white bg-transparent hover:bg-red-600 hover:border-none "
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
 
-      {isOpen ? <NavbarModal onClose={handleToggleModal} /> : null}
+      {isOpen ? (
+        <NavbarModal
+          onClose={handleToggleModal}
+          onLogout={handleLogout}
+          user={user}
+        />
+      ) : null}
     </header>
   );
 };

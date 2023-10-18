@@ -32,7 +32,7 @@ const PopularMovies = () => {
       <div className="flex justify-between items-center mb-8">
         <h2 className="font-semibold text-xl">Popular Movies</h2>
       </div>
-      <div className="flex md:flex-row flex-wrap justify-center gap-6 text-white">
+      <div className="flex md:flex-row flex-wrap justify-center gap-6 text-white mb-12">
         <MovieList movies={popularMovies} />
       </div>
     </section>

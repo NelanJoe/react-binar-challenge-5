@@ -68,7 +68,7 @@ const Carousel = () => {
       ref={emblaRef}
     >
       <div className="flex">{renderedCarouselItem}</div>
-      <div className="absolute top-[30%] left-1 md:top-[25%] xl:top-1/2 cursor-pointer md:left-1 xl:left-10">
+      <div className="absolute top-1/2 left-1 md:top-[25%] xl:top-1/2 cursor-pointer md:left-1 xl:left-10">
         <button onClick={scrollPrev}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ const Carousel = () => {
           </svg>
         </button>
       </div>
-      <div className="absolute top-[30%] right-1 md:top-[25%] xl:top-1/2 cursor-pointer md:right-1 xl:right-10">
+      <div className="absolute top-1/2 right-1 md:top-[25%] xl:top-1/2 cursor-pointer md:right-1 xl:right-10">
         <button onClick={scrollNext}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

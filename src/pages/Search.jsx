@@ -2,28 +2,28 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import MovieItem from "../components/MovieItem";
+import { ENDPOINTS } from "../utils/endpoints";
+
 const Search = () => {
   const [dataResult, setDataResult] = useState([]);
-  const [searchParam] = useSearchParams();
-  const query = searchParam.get("query");
-  const page = searchParam.get("page");
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
+  const token = localStorage.getItem("token");
+  const [searchParam] = useSearchParams();
+  const query = searchParam.get("query");
+  const page = searchParam.get("page");
+
   useEffect(() => {
-    const getMovie = async () => {
+    const getMovie = async (page,query) => {
       try {
-        const response = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }/api/v1/search/movie?page=${page}&query=${query}`,
-          {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IkZhaG1pIEFsZmFyZXphIiwiZW1haWwiOiJmYWxmYXJlemExQGJpbmFyYWNhZGVteS5vcmciLCJpYXQiOjE2OTMxODEzMTV9.ki5wCImtVV7qOhzZHf5A4RuxcU7XcAdMQ5QLVTe_6zY`,
-            },
-          }
-        );
+        const SEARCH_URL = ENDPOINTS.searchMovies(page,query);
+        const response = await axios.get(SEARCH_URL, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const { data } = response.data;
         setDataResult(data);
       } catch (error) {
@@ -43,11 +43,8 @@ const Search = () => {
         });
       }
     };
-    getMovie();
-    console.log(dataResult);
-  }, [page, query]);
-  console.log(query);
-  console.log(dataResult);
+    getMovie(page,query);
+  }, [page, query, errors]);
 
   return (
     <>
