@@ -6,10 +6,6 @@ import { ENDPOINTS } from "../utils/endpoints";
 
 const Search = () => {
   const [dataResult, setDataResult] = useState([]);
-  const [errors, setErrors] = useState({
-    isError: false,
-    message: null,
-  });
   const token = localStorage.getItem("token");
   const [searchParam] = useSearchParams();
   const query = searchParam.get("query");
@@ -26,36 +22,35 @@ const Search = () => {
         });
         const { data } = response.data;
         setDataResult(data);
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          setErrors({
-            ...errors,
-            isError: true,
-            message: error?.response?.data?.message,
-          });
-          return;
-        }
-        alert(errors.message);
-        setErrors({
-          ...error,
-          isError: true,
-          message: error?.message,
-        });
+      } catch (errors) {
+        alert(errors);
       }
     };
     getMovie(page, query);
-  }, [page, query, errors]);
+  }, [page, query,  token]);
 
   return (
     <>
-      <div className="mt-14 mb-8 mx-32 text-2xl font-bold">
-        Result from {'"' + query + '"'}
-      </div>
-      <div className="flex md:flex-row flex-wrap justify-center gap-6">
-        {dataResult?.map((item) => (
-          <MovieItem key={item.id} movie={item} />
-        ))}
-      </div>
+      <section className="max-w-7xl mx-4 md:mx-auto min-h-screen mt-10 mb-10">
+        <div className="flex justify-between items-center mb-8">
+          <div className="text-xl font-bold">
+            Result from {'"' + query + '"'}
+          </div>
+        </div>
+        {dataResult.length < 1 ? (
+          <div className="flex md:flex-row flex-wrap justify-center gap-6">
+            <h2 className="text-xl md:text-3xl font-bold">
+              {'"' + query + '"'} Not Found :(
+            </h2>
+          </div>
+        ) : (
+          <div className="flex md:flex-row flex-wrap justify-start gap-6">
+            {dataResult?.map((item) => (
+              <MovieItem key={item.id} movie={item} />
+            ))}
+          </div>
+        )}
+      </section>
     </>
   );
 };
