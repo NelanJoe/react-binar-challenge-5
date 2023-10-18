@@ -5,6 +5,9 @@ export const ENDPOINTS = {
   login: `${API_URL}/api/v1/auth/login`,
   register: `${API_URL}/api/v1/auth/register`,
   popularMovies: `${API_URL}/api/v1/movie/popular`,
+  searchMovies: (page,query) => {
+   return `${API_URL}/api/v1/search/movie?page=${page}&query=${query}`;
+  },
   detailMovie: (id) => {
     return `${API_URL}/api/v1/movie/${id}`;
   },
