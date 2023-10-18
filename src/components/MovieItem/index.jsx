@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 const MovieItem = ({ movie }) => {
   let imgSrc;
@@ -28,14 +27,14 @@ const MovieItem = ({ movie }) => {
           {movie?.vote_average}
         </p>
         <div
-          className="tooltip tooltip-primary xl:tooltip-right md:tooltip-top"
+          className="tooltip tooltip-primary xl:tooltip-top md:tooltip-top"
           data-tip={movie?.overview}
         >
           <p className="truncate cursor-pointer">{movie?.overview}</p>
         </div>
         <div className="card-actions justify-end">
-          <Link
-            to={`/movie/${movie?.id}`}
+          <a
+            href={`movie/${movie?.id}`}
             className="btn btn-primary inline-flex w-full"
           >
             <span>
@@ -55,7 +54,7 @@ const MovieItem = ({ movie }) => {
               </svg>
             </span>
             See Detail
-          </Link>
+          </a>
         </div>
       </div>
     </div>
