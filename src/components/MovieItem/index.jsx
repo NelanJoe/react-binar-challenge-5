@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const MovieItem = ({ movie }) => {
   let imgSrc;
   if (!movie.poster_path || !movie.backdrop_path) {
-    imgSrc = `https://fakeimg.pl/350x200/?text=Not+Available+Image`;
+    imgSrc = `https://fakeimg.pl/380x550/?text=Not+Available+Image`;
   } else {
     imgSrc = `https://image.tmdb.org/t/p/w300/${
       movie.poster_path || movie.backdrop_path
@@ -11,12 +11,12 @@ const MovieItem = ({ movie }) => {
   }
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl w-full md:w-96">
+    <div className="card card-compact bg-base-100 shadow-xl w-full md:w-[300px]">
       <figure>
         <img
           src={imgSrc}
           alt="Shoes"
-          className="w-full h-[200px] object-top object-cover"
+          className="w-full h-full object-top object-cover"
         />
       </figure>
       <div className="card-body">
