@@ -8,8 +8,6 @@ const SearchForm = ({ onClose }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate(`/search?page=1&query=${query}`);
-
     if (!query || query === null) return;
 
     navigate(`/search?page=1&query=${query}`);

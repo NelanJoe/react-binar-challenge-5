@@ -2,15 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ENDPOINTS } from "../utils/endpoints";
-import MovieList from "../components/MovieList";
+import MovieItem from "../components/MovieItem"
 
 const Search = () => {
   const [dataResult, setDataResult] = useState([]);
-  const [errors, setErrors] = useState({
-    isError: false,
-    message: null,
-  });
-
+  const token = localStorage.getItem("token");
   const [searchParam] = useSearchParams();
   const query = searchParam.get("query");
   const page = searchParam.get("page");
@@ -26,46 +22,37 @@ const Search = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
         const { data } = response.data;
         setDataResult(data);
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          setErrors({
-            ...errors,
-            isError: true,
-            message: error?.response?.data?.message,
-          });
-          return;
-        }
-        alert(errors.message);
-        setErrors({
-          ...error,
-          isError: true,
-          message: error?.message,
-        });
+      } catch (errors) {
+        alert(errors);
       }
     };
     getMovie(page, query);
-  }, [page, query, errors]);
+  }, [page, query,  token]);
 
   return (
     <>
-      <div className="mt-14 mb-8 mx-32 text-2xl font-bold">
-        Result from {'"' + query + '"'}
-      </div>
-      {dataResult.length ? (
-        <div className="flex md:flex-row flex-wrap justify-center gap-6 mb-12">
-          <MovieList movies={dataResult} />
+      <section className="max-w-7xl mx-4 md:mx-auto min-h-screen mt-10 mb-10">
+        <div className="flex justify-between items-center mb-8">
+          <div className="text-xl font-bold">
+            Result from {'"' + query + '"'}
+          </div>
         </div>
-      ) : (
-        <div className="h-screen grid place-content-center">
-          <h2 className="font-semibold text-xl">
-            Not found movies with title{" "}
-            <span className="bg-red-500 text-white px-2 py-1 rounded-2xl">{`${query}`}</span>
-          </h2>
-        </div>
-      )}
+        {dataResult.length < 1 ? (
+          <div className="flex md:flex-row flex-wrap justify-center gap-6">
+            <h2 className="text-xl md:text-3xl font-bold">
+              {'"' + query + '"'} Not Found :(
+            </h2>
+          </div>
+        ) : (
+          <div className="flex md:flex-row flex-wrap justify-start gap-6">
+            {dataResult?.map((item) => (
+              <MovieItem key={item.id} movie={item} />
+            ))}
+          </div>
+        )}
+      </section>
     </>
   );
 };

@@ -14,7 +14,7 @@ const DetailMovie = () => {
   const show = () => {
     document.getElementById("my_modal_4").showModal();
   };
-
+  console.log(token);
   useEffect(() => {
     const getData = async (id) => {
       const DETAIL_URL = ENDPOINTS.detailMovie(id);
