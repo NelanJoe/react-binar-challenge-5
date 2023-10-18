@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Modal from "../components/Modal";
 import { ENDPOINTS } from "../utils/endpoints";
+import Modal from "../components/Modal/Index";
 
 const DetailMovie = () => {
   const [key, setKey] = useState("");
@@ -93,7 +93,7 @@ const DetailMovie = () => {
           </div>
         </div>
       </div>
-      <Modal show={show} keytube={key}></Modal>
+      <Modal show={show} keytube={key} />
     </>
   );
 };

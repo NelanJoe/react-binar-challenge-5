@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import MovieItem from "../components/MovieItem";
 import { ENDPOINTS } from "../utils/endpoints";
+import MovieList from "../components/MovieList";
 
 const Search = () => {
   const [dataResult, setDataResult] = useState([]);
@@ -12,6 +12,8 @@ const Search = () => {
   const page = searchParam.get("page");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
     const getMovie = async (page, query) => {
       try {
         const SEARCH_URL = ENDPOINTS.searchMovies(page, query);
