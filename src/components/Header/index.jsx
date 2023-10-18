@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import NavbarModal from "../NavbarModal";
 import SearchForm from "../SearchForm";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,9 @@ const Header = () => {
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
+    toast.success("Successfully logout", {
+      duration: 2000,
+    });
     window.location.replace("/login");
   };
 
