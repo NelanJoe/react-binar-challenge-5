@@ -34,7 +34,7 @@ const Modal = ({ keytube }) => {
         <dialog id="my_modal_4" className="modal">
           <div className="modal-box w-10/12 max-w-5xl min-h-[300px] lg:min-h-[350px] flex items-center justify-center">
             <strong className="text-center text-lg md:text-2xl">
-              Trailer Not avalable :(
+              Sorry Trailer Not Avalable 😥
             </strong>
             <div className="modal-action">
               <form method="dialog">
