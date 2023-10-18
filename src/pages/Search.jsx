@@ -16,9 +16,9 @@ const Search = () => {
   const page = searchParam.get("page");
 
   useEffect(() => {
-    const getMovie = async (page,query) => {
+    const getMovie = async (page, query) => {
       try {
-        const SEARCH_URL = ENDPOINTS.searchMovies(page,query);
+        const SEARCH_URL = ENDPOINTS.searchMovies(page, query);
         const response = await axios.get(SEARCH_URL, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,12 +43,14 @@ const Search = () => {
         });
       }
     };
-    getMovie(page,query);
+    getMovie(page, query);
   }, [page, query, errors]);
 
   return (
     <>
-      <h3>Result from {'"' + query + '"'}</h3>
+      <div className="mt-14 mb-8 mx-32 text-2xl font-bold">
+        Result from {'"' + query + '"'}
+      </div>
       <div className="flex md:flex-row flex-wrap justify-center gap-6">
         {dataResult?.map((item) => (
           <MovieItem key={item.id} movie={item} />
