@@ -49,11 +49,7 @@ const Header = () => {
         <div className="navbar-start h-16">
           <Link
             to="/"
-<<<<<<< HEAD
-            className="text-2xl md:text-4xl font-semibold te  xt-red-500"
-=======
             className="text-2xl md:text-4xl font-semibold text-gray-900 dark:text-red-500"
->>>>>>> 1a55ec9882c34d50c5437b23d88ce3ffb0ea1d2d
           >
             MovieReview
           </Link>
