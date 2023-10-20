@@ -47,15 +47,6 @@ const DetailMovie = () => {
     getData(movieId);
   }, [movieId, token]);
 
-  let imgSrc;
-  if (!dataFilm.poster_path || !dataFilm.backdrop_path) {
-    imgSrc = `https://fakeimg.pl/380x550/?text=Not+Available+Image`;
-  } else {
-    imgSrc = `https://image.tmdb.org/t/p/w300/${
-      dataFilm.poster_path || dataFilm.backdrop_path
-    }`;
-  }
-
   return (
     <>
       <div className="hero min-h-screen">
