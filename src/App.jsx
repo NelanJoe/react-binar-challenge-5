@@ -13,11 +13,13 @@ import Footer from "./components/Footer";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ENDPOINTS } from "./utils/endpoints";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <GoogleOAuthProvider clientId={ENDPOINTS.googleOauthClientId}>
       <BrowserRouter>
+        <Toaster position="top-right" reverseOrder={false} />
         <Header />
         <Routes>
           <Route element={<ProtectedRoute />}>

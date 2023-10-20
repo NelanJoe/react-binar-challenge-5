@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import NavbarModal from "../NavbarModal";
 import SearchForm from "../SearchForm";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,9 @@ const Header = () => {
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
+    toast.success("Successfully logout", {
+      duration: 2000,
+    });
     window.location.replace("/login");
   };
 
@@ -45,7 +49,11 @@ const Header = () => {
         <div className="navbar-start h-16">
           <Link
             to="/"
+<<<<<<< HEAD
             className="text-2xl md:text-4xl font-semibold te  xt-red-500"
+=======
+            className="text-2xl md:text-4xl font-semibold text-gray-900 dark:text-red-500"
+>>>>>>> 1a55ec9882c34d50c5437b23d88ce3ffb0ea1d2d
           >
             MovieReview
           </Link>

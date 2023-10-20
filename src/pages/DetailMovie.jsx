@@ -10,10 +10,17 @@ const DetailMovie = () => {
   const [dataFilm, setDataFilm] = useState([]);
   const token = localStorage.getItem("token");
   const { movieId } = useParams();
-
   const show = () => {
     document.getElementById("my_modal_4").showModal();
   };
+  let imgSrc;
+  if (!dataFilm.poster_path || !dataFilm.backdrop_path) {
+    imgSrc = `https://fakeimg.pl/380x550/?text=Not+Available+Image`;
+  } else {
+    imgSrc = `https://image.tmdb.org/t/p/w300/${
+      dataFilm.poster_path || dataFilm.backdrop_path
+    }`;
+  }
   console.log(token);
   useEffect(() => {
     const getData = async (id) => {
@@ -41,17 +48,10 @@ const DetailMovie = () => {
 
   return (
     <>
-      <div
-        className="hero min-h-screen"
-        style={{
-          backgroundImage: `${
-            import.meta.env.VITE_API_IMAGE_URL + dataFilm.backdrop_path
-          }`,
-        }}
-      >
+      <div className="hero min-h-screen">
         <div className="hero-content flex-col justify-start md:flex-row xl:flex-row w-full space-x-9">
           <img
-            src={import.meta.env.VITE_API_IMAGE_URL + dataFilm.poster_path}
+            src={imgSrc}
             className=" rounded-lg shadow-2xl w-6/12 sm:w-5/12 md:w-3/12 xl:3/12"
           />
           <div className="space-y-4 justify-start md:w-7/12">
