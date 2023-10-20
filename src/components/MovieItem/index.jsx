@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 const MovieItem = ({ movie }) => {
   let imgSrc;
@@ -34,8 +33,8 @@ const MovieItem = ({ movie }) => {
           <p className="truncate cursor-pointer">{movie?.overview}</p>
         </div>
         <div className="card-actions justify-end">
-          <Link
-            to={`/movie/${movie?.id}`}
+          <a
+            href={`movie/${movie?.id}`}
             className="btn btn-primary inline-flex w-full"
           >
             <span>
@@ -55,7 +54,7 @@ const MovieItem = ({ movie }) => {
               </svg>
             </span>
             See Detail
-          </Link>
+          </a>
         </div>
       </div>
     </div>
